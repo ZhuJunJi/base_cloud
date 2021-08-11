@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhujunji.base.mapper.SysWorkItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhujunji.base.domain.SysWorkItemDO">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name_zh" jdbcType="VARCHAR" property="nameZh"/>
+        <result column="name_en" jdbcType="VARCHAR" property="nameEn"/>
+        <result column="collection" jdbcType="VARCHAR" property="collection"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="is_delete" jdbcType="BIGINT" property="deleted"/>
+    </resultMap>
+
+    <sql id="BaseColumn">
+        `id`,`name_zh`,`name_en`,`collection`,`description`,`update_by`,`update_time`,`create_by`,`create_time`,`is_delete`
+    </sql>
+
+    <insert id="insert" parameterType="com.zhujunji.base.domain.SysWorkItemDO">
+        INSERT INTO `sys_workitem`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nameZh != null and nameZh != ''">
+                `name_zh`,
+            </if>
+            <if test="nameEn != null and nameEn != ''">
+                `name_en`,
+            </if>
+            <if test="collection != null and collection != ''">
+                `collection`,
+            </if>
+            <if test="description != null and description != ''">
+                `description`,
+            </if>
+            <if test="updateBy != null">
+                `update_by`,
+            </if>
+            <if test="createBy != null">
+                `create_by`,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nameZh != null and nameZh != ''">
+                #{nameZh},
+            </if>
+            <if test="nameEn != null and nameEn != ''">
+                #{nameEn},
+            </if>
+            <if test="collection != null and collection != ''">
+                #{collection},
+            </if>
+            <if test="description != null and description != ''">
+                #{description},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumn"/>
+        FROM `sys_workitem` WHERE id = #{workItemId}
+    </select>
+
+</mapper>

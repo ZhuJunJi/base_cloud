@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhujunji.base.mapper.SysWorkItemFieldMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhujunji.base.domain.SysWorkItemFieldDO">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="work_item_id" jdbcType="BIGINT" property="workItemId"/>
+        <result column="field_id" jdbcType="BIGINT" property="fieldId"/>
+        <result column="name_zh" jdbcType="VARCHAR" property="nameZh"/>
+        <result column="name_en" jdbcType="VARCHAR" property="nameEn"/>
+        <result column="field_key" jdbcType="VARCHAR" property="fieldKey"/>
+        <result column="field_des" jdbcType="VARCHAR" property="fieldDes"/>
+        <result column="field_type" jdbcType="BIGINT" property="fieldType"/>
+        <result column="dict_type" jdbcType="VARCHAR" property="dictType"/>
+        <result column="min_value" jdbcType="VARCHAR" property="minValue"/>
+        <result column="max_value" jdbcType="VARCHAR" property="maxValue"/>
+        <result column="default_value" jdbcType="VARCHAR" property="defaultValue"/>
+        <result column="is_require" jdbcType="BIGINT" property="required"/>
+        <result column="is_readonly" jdbcType="BIGINT" property="readonly"/>
+        <result column="area_group" jdbcType="BIGINT" property="areaGroup"/>
+        <result column="sort" jdbcType="BIGINT" property="sort"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="is_delete" jdbcType="BIGINT" property="deleted"/>
+    </resultMap>
+
+    <sql id="BaseColumn">
+        `id`,`work_item_id`,`field_id`,`name_zh`,`name_en`,`field_key`,`field_des`,`field_type`,`dict_type`,`min_value`,`max_value`,`default_value`,`is_require`,`is_readonly`,`area_group`,`sort`,`update_by`,`update_time`,`create_by`,`create_time`,`is_delete`
+    </sql>
+
+    <insert id="insert" parameterType="com.zhujunji.base.domain.SysWorkItemFieldDO">
+        INSERT INTO `sys_workitem_field`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workItemId != null">
+                `work_item_id`,
+            </if>
+            <if test="fieldId != null">
+                `field_id`,
+            </if>
+            <if test="nameZh != null and nameZh != ''">
+                `name_zh`,
+            </if>
+            <if test="nameEn != null and nameEn != ''">
+                `name_en`,
+            </if>
+            <if test="fieldKey != null and fieldKey != ''">
+                `field_key`,
+            </if>
+            <if test="fieldDes != null and fieldDes != ''">
+                `field_des`,
+            </if>
+            <if test="fieldType != null">
+                `field_type`,
+            </if>
+            <if test="dictType != null and dictType != ''">
+                `dict_type`,
+            </if>
+            <if test="minValue != null and minValue != ''">
+                `min_value`,
+            </if>
+            <if test="maxValue != null and maxValue != ''">
+                `max_value`,
+            </if>
+            <if test="defaultValue != null and defaultValue != ''">
+                `default_value`,
+            </if>
+            <if test="required != null">
+                `is_require`,
+            </if>
+            <if test="readonly != null">
+                `is_readonly`,
+            </if>
+            <if test="areaGroup != null and areaGroup != ''">
+                `area_group`,
+            </if>
+            <if test="sort != null">
+                `sort`,
+            </if>
+            <if test="updateBy != null">
+                `update_by`,
+            </if>
+            <if test="createBy != null">
+                `create_by`,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workItemId != null">
+                #{workItemId},
+            </if>
+            <if test="fieldId != null">
+                #{fieldId},
+            </if>
+            <if test="nameZh != null and nameZh != ''">
+                #{nameZh},
+            </if>
+            <if test="nameEn != null and nameEn != ''">
+                #{nameEn},
+            </if>
+            <if test="fieldKey != null and fieldKey != ''">
+                #{fieldKey},
+            </if>
+            <if test="fieldDes != null and fieldDes != ''">
+                #{fieldDes},
+            </if>
+            <if test="fieldType != null">
+                #{fieldType},
+            </if>
+            <if test="dictType != null and dictType != ''">
+                #{dictType},
+            </if>
+            <if test="minValue != null and minValue != ''">
+                #{minValue},
+            </if>
+            <if test="maxValue != null and maxValue != ''">
+                #{maxValue},
+            </if>
+            <if test="defaultValue != null and defaultValue != ''">
+                #{defaultValue},
+            </if>
+            <if test="required != null">
+                #{required},
+            </if>
+            <if test="readonly != null">
+                #{readonly},
+            </if>
+            <if test="areaGroup != null and areaGroup != ''">
+                #{areaGroup},
+            </if>
+            <if test="sort != null">
+                #{sort},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findWorkItemFieldList" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumn"/>
+        FROM `sys_workitem_field` WHERE work_item_id = #{workItemId}
+    </select>
+
+</mapper>

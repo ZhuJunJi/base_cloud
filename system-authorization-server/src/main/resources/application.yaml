@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: system-authorization-server
+  profiles:
+    active: dev
+server:
+  port: 9098
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/sso?serverTimezone=Asia/Shanghai
+    username: root
+    password: "123456"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        group: DEFAULT_GROUP
+  redis:
+    database: 2
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+    timeout: 100ms
+dubbo:w
+  cloud:
+    subscribed-services: "base-microservice-provider"
+  protocol:
+    name: dubbo
+    port: -1

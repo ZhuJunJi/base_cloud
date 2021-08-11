@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhujunji.base.mapper.SysDictMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhujunji.base.domain.SysDictDO">
+        <id column="dict_id" jdbcType="BIGINT" property="dictId" />
+        <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+        <result column="parent_ids" jdbcType="VARCHAR" property="parentIds" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="label_zh" jdbcType="VARCHAR" property="labelZh" />
+        <result column="label_en" jdbcType="VARCHAR" property="labelEn" />
+        <result column="value" jdbcType="VARCHAR" property="value" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="create_by" jdbcType="BIGINT" property="createBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="is_delete" jdbcType="BOOLEAN" property="deleted" />
+    </resultMap>
+
+    <sql id="BaseColumn">
+        `dict_id`,`parent_id`,`parent_ids`,`type`,`label_zh`,`label_en`,`value`,`sort`,`update_by`,`update_time`,`create_by`,`create_time`,`is_delete`
+    </sql>
+
+    <insert id="insert" parameterType="com.zhujunji.base.domain.SysDictDO">
+        INSERT INTO `sys_dict`
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="parentId != null and parentId != ''">
+                    `parent_id`,
+                </if>
+                <if test="type != null and type != ''">
+                    `type`,
+                </if>
+                <if test="labelZh != null and labelZh != ''">
+                    `label_zh`,
+                </if>
+                <if test="labelEn != null and labelEn != ''">
+                    `label_en`,
+                </if>
+                <if test="value != null and value != ''">
+                    `value`,
+                </if>
+                <if test="sort != null">
+                    `sort`,
+                </if>
+                <if test="updateBy != null and updateBy != ''">
+                    `update_by`,
+                </if>
+                <if test="createBy != null and createBy != ''">
+                    `create_by`,
+                </if>
+            </trim>
+        VALUES
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="parentId != null and parentId != ''">
+                    #{parentId},
+                </if>
+                <if test="type != null and type != ''">
+                    #{type},
+                </if>
+                <if test="labelZh != null and labelZh != ''">
+                    #{labelZh},
+                </if>
+                <if test="labelEn != null and labelEn != ''">
+                    #{labelEn},
+                </if>
+                <if test="value != null and value != ''">
+                    #{value},
+                </if>
+                <if test="sort != null">
+                    #{sort},
+                </if>
+                <if test="updateBy != null and updateBy != ''">
+                    #{updateBy},
+                </if>
+                <if test="createBy != null and createBy != ''">
+                    #{createBy},
+                </if>
+            </trim>
+    </insert>
+
+    <update id="update" parameterType="com.zhujunji.base.domain.SysDictDO">
+        UPDATE `sys_dict`
+        <set>
+            <if test="parentId != null">
+                `parent_id` = #{parentId},
+            </if>
+            <if test="parentIds != null and parentIds != ''">
+                `parent_ids` = #{parentIds},
+            </if>
+            <if test="labelZh != null and labelZh != ''">
+                `label_zh` = #{labelZh},
+            </if>
+            <if test="labelEn != null and labelEn != ''">
+                `label_en` = #{labelEn},
+            </if>
+            <if test="value != null and value != ''">
+                `value` = #{value},
+            </if>
+            `update_by` = #{updateBy},
+        </set>
+        WHERE dict_id = #{dictId}
+    </update>
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumn"/> FROM `sys_dict` WHERE dict_id = #{dictId}
+    </select>
+
+    <select id="findByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumn"/> FROM `sys_dict` WHERE type = #{type} ORDER BY `sort`
+    </select>
+
+</mapper>

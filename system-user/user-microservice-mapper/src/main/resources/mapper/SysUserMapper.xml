@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhujunji.user.mapper.SysUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhujunji.user.domain.SysUserDO">
+        <id column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="create_by" jdbcType="INTEGER" property="createBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="BaseColumn">
+        `user_id`,`username`,`password`,`nickname`,`email`,`status`,`create_by`,`create_time`,`update_by`,`update_time`
+    </sql>
+
+    <insert id="insert" parameterType="com.zhujunji.user.domain.SysUserDO">
+        INSERT INTO `sys_user` (`username`, `password`, `create_by`, `update_by`) VALUES (#{username}, #{password}, #{createBy}, #{updateBy})
+    </insert>
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumn"/> FROM `sys_user` WHERE user_id = #{userId}
+    </select>
+
+    <select id="findList" resultMap="BaseResultMap">
+        SELECT user_id, username, password FROM `sys_user`
+    </select>
+
+    <select id="getByUsername" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumn"/> FROM `sys_user` WHERE username = #{username}
+    </select>
+
+</mapper>

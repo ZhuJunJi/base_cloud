@@ -1,0 +1,39 @@
+server:
+  port: 7070
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: dev
+logging:
+  config: classpath:logback.xml
+  level:
+    org.springframework.cloud.gateway: debug
+management:
+  endpoint:
+    health:
+      show-details: always
+---
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        group: DEFAULT_GROUP
+  config:
+    activate:
+      on-profile: dev
+dubbo:
+  cloud:
+    subscribed-services: "*"
+  registry:
+    address: nacos://127.0.0.1:8848
+  protocol:
+    port: -1
+    name: dubbo

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhujunji.user.mapper.SysUserRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhujunji.user.domain.SysUserRoleDO">
+        <id column="user_role_id" jdbcType="BIGINT" property="userRoleId" />
+        <id column="role_id" jdbcType="BIGINT" property="roleId" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+    </resultMap>
+
+    <sql id="BaseColumn">
+        `user_role_id`,`user_id`,`role_id`
+    </sql>
+
+    <insert id="insert" parameterType="com.zhujunji.user.domain.SysUserRoleDO">
+        INSERT INTO `sys_user_role` (`user_id`, `role_id`) VALUES (#{userId}, #{roleId})
+    </insert>
+
+    <delete id="deleteByUserIdAndRoleId">
+        DELETE FROM `sys_user_role` WHERE user_id = #{userId} AND role_id = #{roleId}
+    </delete>
+
+    <select id="findByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumn"/> FROM `sys_user_role` WHERE user_id = #{userId}
+    </select>
+
+</mapper>

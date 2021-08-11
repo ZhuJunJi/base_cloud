@@ -1,0 +1,28 @@
+spring:
+  data:
+    mongodb:
+      address: "127.0.0.1:27017"
+      database: base_cloud
+      username: root
+      password: 123456
+      maxSize: 100
+      minSize: 0
+      maxWaitTime: 120000
+      maxConnectionLifeTime: 0
+      maxConnectionIdleTime: 0
+      maintenanceInitialDelay: 0
+      maintenanceFrequency: 1000
+
+      connectTimeout: 10000
+      readTimeout: 10000
+      receiveBufferSize: 67108864
+      sendBufferSize: 67108864
+
+      sslEnabled: false
+      sslInvalidHostNameAllowed: false
+
+      localThreshold: 15
+      serverSelectionTimeout: 30000
+
+      heartbeatFrequency: 10000
+      minHeartbeatFrequency: 500

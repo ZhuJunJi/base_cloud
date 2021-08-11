@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhujunji.user.mapper.SysRolePermissionMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhujunji.user.domain.SysRolePermissionDO">
+        <id column="role_permission_id" jdbcType="BIGINT" property="rolePermissionId"/>
+        <id column="role_id" jdbcType="BIGINT" property="roleId"/>
+        <result column="permission_id" jdbcType="INTEGER" property="permissionId"/>
+    </resultMap>
+
+    <sql id="BaseColumn">
+        `role_permission_id`,`role_id`,`permission_id`
+    </sql>
+
+    <insert id="insert" parameterType="com.zhujunji.user.domain.SysUserRoleDO">
+        INSERT INTO `sys_role_permission` (`role_permission_id`, `role_id`, `role_permission_id`)
+        VALUES (#{role_permission_id}, #{role_id}, #{role_permission_id})
+    </insert>
+
+    <select id="findByRoleId" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumn"/> FROM `sys_role_permission` WHERE role_id = #{roleId}
+    </select>
+
+</mapper>
