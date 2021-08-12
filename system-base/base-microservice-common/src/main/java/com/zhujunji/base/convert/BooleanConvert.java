@@ -1,7 +1,6 @@
 package com.zhujunji.base.convert;
 
-import com.alibaba.fastjson.util.TypeUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.zhujunji.common.enums.BooleanEnum;
 
 public class BooleanConvert implements Convert<Boolean> {
 
@@ -13,10 +12,7 @@ public class BooleanConvert implements Convert<Boolean> {
         if(value instanceof Boolean){
             return (Boolean) value;
         }
-        if(value instanceof String){
-            return stringToValue((String)value);
-        }
-        return TypeUtils.castToJavaBean(value,Boolean.class);
+        return stringToValue(String.valueOf(value));
     }
 
     @Override
@@ -26,6 +22,6 @@ public class BooleanConvert implements Convert<Boolean> {
 
     @Override
     public Boolean stringToValue(String value) {
-        return StringUtils.isBlank(value) ? null : Boolean.parseBoolean(value);
+        return  BooleanEnum.getByLabel(value).map(BooleanEnum::getValue).orElse(null);
     }
 }

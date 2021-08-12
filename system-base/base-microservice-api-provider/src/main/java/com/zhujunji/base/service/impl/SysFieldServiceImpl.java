@@ -105,11 +105,11 @@ public class SysFieldServiceImpl implements SysFiledService {
         if(fieldType == null){
             throw new CommonBizException(ExpCodeEnum.FIELD_TYPE_NULL_EXCEPTION);
         }
-        boolean isPickList = FieldTypeEnum.isPickList(fieldType);
-        if(isPickList && StringUtils.isBlank(sysFieldCreateDTO.getDictType())){
+
+        if(fieldType.isPickList() && StringUtils.isBlank(sysFieldCreateDTO.getDictType())){
             throw new CommonBizException(ExpCodeEnum.FIELD_DICT_TYP_NULL_EXCEPTION);
         }
-        sysFieldCreateDTO.setDictType(isPickList ? sysFieldCreateDTO.getDictType() : null);
+        sysFieldCreateDTO.setDictType(fieldType.isPickList() ? sysFieldCreateDTO.getDictType() : null);
         SysFieldDO sysFieldDO = new SysFieldDO();
         BeanUtils.copyProperties(sysFieldCreateDTO,sysFieldDO);
         sysFieldDO.setUpdateBy(sysFieldCreateDTO.getCreateBy());
@@ -132,12 +132,11 @@ public class SysFieldServiceImpl implements SysFiledService {
         FieldTypeEnum fieldType = sysFieldUpdateDTO.getFieldType();
         if(fieldType != null){
             // 更新了字段类型类型
-            boolean isPicklist = FieldTypeEnum.isPickList(fieldType);
-            if(isPicklist && StringUtils.isBlank(sysFieldUpdateDTO.getDictType())){
+            if(fieldType.isPickList() && StringUtils.isBlank(sysFieldUpdateDTO.getDictType())){
                 throw new CommonBizException(ExpCodeEnum.FIELD_DICT_TYP_NULL_EXCEPTION);
             }
             // 更新为非 picklist 类型字段时，dictType 需要置空
-            sysFieldUpdateDTO.setDictType(isPicklist ? sysFieldUpdateDTO.getDictType() : "");
+            sysFieldUpdateDTO.setDictType(fieldType.isPickList() ? sysFieldUpdateDTO.getDictType() : "");
         }else {
             // 没有更新字段类型时，dictType 也不能更新
             sysFieldUpdateDTO.setDictType(null);

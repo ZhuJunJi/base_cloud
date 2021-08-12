@@ -22,6 +22,7 @@ public class FieldFactory {
         TYPE_FIELD_CLASS_MAP.put(FieldTypeEnum.DOUBLE, DoubleField.class);
         TYPE_FIELD_CLASS_MAP.put(FieldTypeEnum.INTEGER, IntegerField.class);
         TYPE_FIELD_CLASS_MAP.put(FieldTypeEnum.LONG, LongField.class);
+        TYPE_FIELD_CLASS_MAP.put(FieldTypeEnum.OBJECT_ID, ObjectIdField.class);
         TYPE_FIELD_CLASS_MAP.put(FieldTypeEnum.PICKLIST_DOUBLE, PicklistDoubleField.class);
         TYPE_FIELD_CLASS_MAP.put(FieldTypeEnum.PICKLIST_INTEGER, PicklistIntegerField.class);
         TYPE_FIELD_CLASS_MAP.put(FieldTypeEnum.PICKLIST_STRING, StringField.class);

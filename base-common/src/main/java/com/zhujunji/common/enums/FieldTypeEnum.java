@@ -1,11 +1,11 @@
 package com.zhujunji.common.enums;
 
-import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Optional;
 
 public enum FieldTypeEnum implements Serializable {
 
@@ -95,14 +95,10 @@ public enum FieldTypeEnum implements Serializable {
      * @param code 编号
      * @return FieldTypeEnum
      */
-    public static FieldTypeEnum getByCode(Integer code){
-        if(code == null || code < 0){
-            return null;
-        }
+    public static Optional<FieldTypeEnum> getByCode(Integer code){
         return Arrays.stream(values())
                 .filter(fieldTypeEnum -> fieldTypeEnum.code.equals(code))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     /**
@@ -110,14 +106,10 @@ public enum FieldTypeEnum implements Serializable {
      * @param description   描述
      * @return FieldTypeEnum
      */
-    public static FieldTypeEnum getByDescription(String description){
-        if(StringUtils.isBlank(description)){
-            return null;
-        }
+    public static Optional<FieldTypeEnum> getByDescription(String description){
         return Arrays.stream(values())
                 .filter(fieldTypeEnum -> fieldTypeEnum.description.equals(description))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     /**

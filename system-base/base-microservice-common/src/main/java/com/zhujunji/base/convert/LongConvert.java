@@ -1,6 +1,5 @@
 package com.zhujunji.base.convert;
 
-import com.alibaba.fastjson.util.TypeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class LongConvert implements Convert<Long> {
@@ -13,10 +12,7 @@ public class LongConvert implements Convert<Long> {
         if(value instanceof Long){
             return (Long) value;
         }
-        if(value instanceof String){
-            return stringToValue((String) value);
-        }
-        return TypeUtils.castToJavaBean(value,Long.class);
+        return stringToValue(String.valueOf(value));
     }
 
     @Override

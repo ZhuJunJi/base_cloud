@@ -1,7 +1,5 @@
 package com.zhujunji.base.convert;
 
-import com.alibaba.fastjson.util.TypeUtils;
-
 public class StringConvert implements Convert<String> {
 
     @Override
@@ -9,10 +7,7 @@ public class StringConvert implements Convert<String> {
         if(value == null){
             return null;
         }
-        if(value instanceof String){
-            return (String)value;
-        }
-        return TypeUtils.castToJavaBean(value,String.class);
+        return stringToValue(String.valueOf(value));
     }
 
     @Override

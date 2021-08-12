@@ -2,6 +2,7 @@ package com.zhujunji.common.enums;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * 操作类型枚举
@@ -34,10 +35,9 @@ public enum OperationTypeEnum implements Serializable {
         return description;
     }
 
-    public static OperationTypeEnum getByCode(Integer code){
+    public static Optional<OperationTypeEnum> getByCode(Integer code){
         return Arrays.stream(OperationTypeEnum.values())
                 .filter(operationTypeEnum -> operationTypeEnum.getCode().equals(code))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

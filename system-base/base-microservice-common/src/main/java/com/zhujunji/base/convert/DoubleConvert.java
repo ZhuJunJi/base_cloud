@@ -1,6 +1,5 @@
 package com.zhujunji.base.convert;
 
-import com.alibaba.fastjson.util.TypeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class DoubleConvert implements Convert<Double> {
@@ -12,10 +11,7 @@ public class DoubleConvert implements Convert<Double> {
         if(value instanceof Double){
             return (Double)value;
         }
-        if(value instanceof String){
-            return stringToValue((String) value);
-        }
-        return TypeUtils.castToJavaBean(value,Double.class);
+        return stringToValue(String.valueOf(value));
     }
 
     @Override

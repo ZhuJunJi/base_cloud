@@ -36,6 +36,7 @@ public enum ExpCodeEnum implements Serializable {
     CONVERT_NOT_EXSIT_EXCEPTION(COM_EXP_PREFIX + "017", "转换器不存在异常！"),
     DEFAULT_FIELD_HANDLER_NOT_EXSIT_EXCEPTION(COM_EXP_PREFIX + "018", "默认的通用字段处理器不存在请检查 Bean:DefaultFieldHandler 是否存在！"),
     PICKLIST_FIELD_OPTION_NOT_EXSIT_EXCEPTION(COM_EXP_PREFIX + "019", "枚举类型字段的选项值不存在！"),
+    STRING_TO_OBJECT_ID_EXCEPTION(COM_EXP_PREFIX + "020",""),
 
     /**
      * User模块异常

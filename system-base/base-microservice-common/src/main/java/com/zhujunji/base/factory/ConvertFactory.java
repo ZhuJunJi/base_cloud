@@ -4,6 +4,7 @@ import com.zhujunji.base.convert.*;
 import com.zhujunji.common.exception.CommonBizException;
 import com.zhujunji.common.exception.ExpCodeEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class ConvertFactory {
         CONVERT_MAP.put(Long.class,new LongConvert());
         CONVERT_MAP.put(Date.class,new DateConvert());
         CONVERT_MAP.put(Boolean.class,new BooleanConvert());
+        CONVERT_MAP.put(ObjectId.class,new ObjectIdConvert());
     }
 
     public static Convert<?> createConvert(Class<?> clazz){

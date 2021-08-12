@@ -2,6 +2,7 @@ package com.zhujunji.common.enums;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum LanguageEnum implements Serializable {
 
@@ -30,14 +31,13 @@ public enum LanguageEnum implements Serializable {
         return description;
     }
 
-    public static LanguageEnum getByCode(Integer code){
+    public static Optional<LanguageEnum> getByCode(Integer code){
         return Arrays.stream(LanguageEnum.values())
                 .filter(languageEnum -> languageEnum.getCode().equals(code))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
-    public static LanguageEnum getByDescription(String description){
-        return getByDescription(description,null);
+    public static Optional<LanguageEnum> getByDescription(String description){
+        return Optional.ofNullable(getByDescription(description,null));
     }
 
     public static LanguageEnum getByDescription(String description, LanguageEnum defaultLanguage){
