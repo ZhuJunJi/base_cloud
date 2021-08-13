@@ -16,6 +16,13 @@ public interface SysWorkItemFieldMapper {
     int insert(SysWorkItemFieldDO sysWorkItemFieldDO);
 
     /**
+     * 更新工作项字段信息
+     * @param sysWorkItemFieldDO    工作项字段信息
+     * @return int
+     */
+    int update(SysWorkItemFieldDO sysWorkItemFieldDO);
+
+    /**
      * 查询工作项字段列表
      * @param workItemId    工作项 ID
      * @return List<SysWorkItemFieldDO>

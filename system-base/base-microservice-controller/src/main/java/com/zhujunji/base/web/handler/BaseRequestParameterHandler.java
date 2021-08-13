@@ -48,31 +48,46 @@ public class BaseRequestParameterHandler {
                 if (baseRequest.getRequester() == null) {
                     baseRequest.setRequester(1L);
                 }
+                // 通用创建请求
                 if (baseRequest instanceof BaseCreateRequest) {
                     BaseCreateRequest baseCreateRequest = (BaseCreateRequest) baseRequest;
                     Long requester = baseCreateRequest.getRequester();
+                    Date requestTime = baseCreateRequest.getRequestTime();
+                    // 创建人
                     baseCreateRequest.setCreateBy(requester);
-
+                    // 创建时间
+                    baseCreateRequest.setCreateTime(requestTime);
+                    // 通用文档创建请求
                     if (baseCreateRequest instanceof BaseJSONObjectCreateRequest) {
                         BaseJSONObjectCreateRequest baseJSONObjectCreateRequest = (BaseJSONObjectCreateRequest) baseRequest;
                         JSONObject data = baseJSONObjectCreateRequest.getData();
-                        Date requestTime = baseJSONObjectCreateRequest.getRequestTime();
+                        // 创建人
                         data.put("create_by", requester);
+                        // 创建时间
                         data.put("create_time", requestTime);
+                        // 更新人
                         data.put("update_by", requester);
+                        // 更新时间
                         data.put("update_time", requestTime);
                     }
                 }
 
+                // 通用更新请求
                 if (baseRequest instanceof BaseUpdateRequest) {
                     BaseUpdateRequest baseUpdateRequest = (BaseUpdateRequest) baseRequest;
                     Long requester = baseUpdateRequest.getRequester();
+                    Date requestTime = baseUpdateRequest.getRequestTime();
+                    // 更新人
                     baseUpdateRequest.setUpdateBy(requester);
+                    // 更新时间
+                    baseUpdateRequest.setUpdateTime(requestTime);
+                    // 通用文档更新请求
                     if (baseUpdateRequest instanceof BaseJSONObjectUpdateRequest) {
                         BaseJSONObjectUpdateRequest baseJSONObjectUpdateRequest = (BaseJSONObjectUpdateRequest) baseUpdateRequest;
                         JSONObject data = baseJSONObjectUpdateRequest.getData();
-                        Date requestTime = baseJSONObjectUpdateRequest.getRequestTime();
+                        // 更新人
                         data.put("update_by", requester);
+                        // 更新时间
                         data.put("update_time", requestTime);
                     }
                 }

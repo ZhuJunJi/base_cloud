@@ -28,9 +28,26 @@ public interface SysWorkItemService {
     /**
      * ID 获取工作项信息
      * @param workItemId    工作项 ID
+     * @param withFields    是否查询工作项字段信息
+     * @return SysWorkItemVO
+     */
+    SysWorkItemVO getById(Long workItemId, boolean withFields);
+
+    /**
+     * ID 获取工作项信息
+     * @param workItemId    工作项 ID
      * @param language      语言版本
      * @return  SysWorkItemVO
      */
     SysWorkItemVO getById(Long workItemId, LanguageEnum language);
+
+    /**
+     * ID 获取工作项信息
+     * @param workItemId    工作项 ID
+     * @param language      语言版本
+     * @param withFields    是否查询工作项字段信息
+     * @return  SysWorkItemVO
+     */
+    SysWorkItemVO getById(Long workItemId, LanguageEnum language, boolean withFields);
 
 }

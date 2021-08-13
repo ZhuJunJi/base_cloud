@@ -46,48 +46,62 @@ public class SysWorkItemServiceImpl implements SysWorkItemService {
 
     @Override
     public SysWorkItemVO getById(Long workItemId) {
-        return getById(workItemId,LanguageEnum.CHINESE);
+        return getById(workItemId, LanguageEnum.CHINESE);
+    }
+
+    @Override
+    public SysWorkItemVO getById(Long workItemId, boolean withFields) {
+        return getById(workItemId, LanguageEnum.CHINESE, withFields);
     }
 
     @Override
     public SysWorkItemVO getById(Long workItemId, LanguageEnum language) {
+        return getById(workItemId, language, true);
+    }
+
+    @Override
+    public SysWorkItemVO getById(Long workItemId, LanguageEnum language, boolean withFields) {
         SysWorkItemDO sysWorkItemDO = sysWorkItemMapper.getById(workItemId);
-        if(sysWorkItemDO == null){
+        if (sysWorkItemDO == null) {
             return null;
         }
         // DO TO VO
         SysWorkItemVO sysWorkItemVO = sysWorkItemDOTOWorkItemVO(sysWorkItemDO);
-        // 补全字段信息
-        List<Field<?>> fieldList = sysWorkItemFieldService.findWorkItemFieldList(workItemId, language);
-        sysWorkItemVO.setFieldList(fieldList);
+
+        if (withFields) {
+            // 补全字段信息
+            List<Field<?>> fieldList = sysWorkItemFieldService.findWorkItemFieldList(workItemId, language);
+            sysWorkItemVO.setFieldList(fieldList);
+        }
         return sysWorkItemVO;
     }
 
     /**
      * 校验工作项创建参数
+     *
      * @param sysWorkItemCreateDTO 工作项信息
      */
     private SysWorkItemDO checkParam(SysWorkItemCreateDTO sysWorkItemCreateDTO) {
-        if(sysWorkItemCreateDTO == null){
+        if (sysWorkItemCreateDTO == null) {
             throw new CommonBizException(ExpCodeEnum.PARAM_NULL);
         }
-        if(StringUtils.isBlank(sysWorkItemCreateDTO.getCollection())){
+        if (StringUtils.isBlank(sysWorkItemCreateDTO.getCollection())) {
             throw new CommonBizException(ExpCodeEnum.WORKITEM_COLLECTION_NULL_EXCEPTION);
         }
-        if(StringUtils.isBlank(sysWorkItemCreateDTO.getNameZh()) || StringUtils.isBlank(sysWorkItemCreateDTO.getNameEn())){
+        if (StringUtils.isBlank(sysWorkItemCreateDTO.getNameZh()) || StringUtils.isBlank(sysWorkItemCreateDTO.getNameEn())) {
             throw new CommonBizException(ExpCodeEnum.WORKITEM_NAME_NULL_EXCEPTION);
         }
-        if(sysWorkItemCreateDTO.getCreateBy() == null){
+        if (sysWorkItemCreateDTO.getCreateBy() == null) {
             throw new CommonBizException(ExpCodeEnum.CREATE_BY_NULL);
         }
         SysWorkItemDO sysWorkItemDO = new SysWorkItemDO();
-        BeanUtils.copyProperties(sysWorkItemCreateDTO,sysWorkItemDO);
+        BeanUtils.copyProperties(sysWorkItemCreateDTO, sysWorkItemDO);
         return sysWorkItemDO;
     }
 
-    private SysWorkItemVO sysWorkItemDOTOWorkItemVO(SysWorkItemDO sysWorkItemDO){
+    private SysWorkItemVO sysWorkItemDOTOWorkItemVO(SysWorkItemDO sysWorkItemDO) {
         SysWorkItemVO sysWorkItemVO = new SysWorkItemVO();
-        BeanUtils.copyProperties(sysWorkItemDO,sysWorkItemVO);
+        BeanUtils.copyProperties(sysWorkItemDO, sysWorkItemVO);
         return sysWorkItemVO;
     }
 }

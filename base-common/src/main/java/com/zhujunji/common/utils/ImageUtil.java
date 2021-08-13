@@ -13,7 +13,7 @@ import java.util.Optional;
 @Slf4j
 public class ImageUtil {
 
-    static Optional<String> imageToBase64(File image) {
+    public static Optional<String> imageToBase64(File image) {
         if (image == null || !image.exists() || !image.isFile()) {
             return Optional.empty();
         }
@@ -22,7 +22,6 @@ public class ImageUtil {
         log.info("image to base64 fileName: {} formatName: {}", fileName, formatNameOptional.orElse(""));
         String imageBase64 = formatNameOptional
                 .map(formatName -> {
-
                     try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
                         BufferedImage bufferedImage = ImageIO.read(image);
                         ImageIO.write(bufferedImage, formatName, outputStream);
@@ -37,8 +36,26 @@ public class ImageUtil {
         return Optional.ofNullable(imageBase64);
     }
 
+    public static Optional<String> imageToBase64Src(File image) {
+        if (image == null || !image.exists() || !image.isFile()) {
+            return Optional.empty();
+        }
+        String fileName = image.getName();
+        Optional<String> formatNameOptional = FileUtil.getSuffix(fileName);
+        String base64Src = formatNameOptional
+                .map(suffix -> {
+                    Optional<String> base64Optional = imageToBase64(image);
+                    return base64Optional
+                            .map(base64 -> "data:image/" + suffix + ";base64," + base64)
+                            .orElse(null);
+                })
+                .orElse(null);
+
+        return Optional.ofNullable(base64Src);
+    }
+
     public static void main(String[] args) {
-        Optional<String> imageBase64Optional = imageToBase64(new File("C:\\Image_20210806180506.png"));
+        Optional<String> imageBase64Optional = imageToBase64Src(new File("C:\\Image_20210806180506.png"));
         imageBase64Optional.ifPresent(System.out::println);
     }
 

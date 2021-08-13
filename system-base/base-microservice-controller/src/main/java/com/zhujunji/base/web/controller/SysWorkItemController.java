@@ -1,5 +1,6 @@
 package com.zhujunji.base.web.controller;
 
+import com.zhujunji.base.service.SysWorkItemFieldService;
 import com.zhujunji.base.service.SysWorkItemService;
 import com.zhujunji.base.service.dto.SysWorkItemCreateDTO;
 import com.zhujunji.base.service.vo.SysWorkItemVO;
@@ -19,6 +20,9 @@ public class SysWorkItemController {
 
     @DubboReference(protocol = "dubbo", version = "1.0.0")
     private SysWorkItemService sysWorkItemService;
+
+    @DubboReference(protocol = "dubbo", version = "1.0.0")
+    private SysWorkItemFieldService sysWorkItemFieldService;
 
     @PostMapping
     public Result<Boolean> createWorkItem(@RequestBody SysWorkItemCreateDTO sysWorkItemCreateDTO){

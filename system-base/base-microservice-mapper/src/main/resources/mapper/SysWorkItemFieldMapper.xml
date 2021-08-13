@@ -141,6 +141,46 @@
         </trim>
     </insert>
 
+    <update id="update" parameterType="com.zhujunji.base.domain.SysWorkItemFieldDO">
+        UPDATE `sys_workitem_field`
+        <set>
+            <if test="nameZh != null and nameZh != ''">
+                `name_zh` = #{nameZh},
+            </if>
+            <if test="nameEn != null and nameEn != ''">
+                `name_en` = #{nameEn},
+            </if>
+            <if test="fieldDes != null and fieldDes != ''">
+                `field_ees` = #{fieldDes},
+            </if>
+            <if test="minValue != null and minValue != ''">
+                `min_value` = #{minValue},
+            </if>
+            <if test="maxValue != null and maxValue != ''">
+                `max_value` = #{maxValue},
+            </if>
+            <if test="defaultValue != null and defaultValue != ''">
+                `default_value` = #{defaultValue},
+            </if>
+            <if test="required != null">
+                `is_require` = #{required},
+            </if>
+            <if test="readonly != null">
+                `is_readonly` = #{readonly},
+            </if>
+            <if test="areaGroup != null and areaGroup != ''">
+                `area_group` = #{areaGroup},
+            </if>
+            <if test="sort != null">
+                `sort` = #{sort},
+            </if>
+            <if test="updateBy != null">
+                `updateBy` = #{updateBy},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
     <select id="findWorkItemFieldList" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumn"/>
