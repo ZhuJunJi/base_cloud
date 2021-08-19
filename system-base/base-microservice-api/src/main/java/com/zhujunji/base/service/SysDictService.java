@@ -16,7 +16,7 @@ public interface SysDictService {
      * 保存字典信息
      * @param sysDictCreateDTO   字典信息
      * @return boolean
-     * @throws CommonBizException
+     * @throws CommonBizException 通用业务异常
      */
     boolean save(SysDictCreateDTO sysDictCreateDTO) throws CommonBizException;
 
@@ -24,7 +24,7 @@ public interface SysDictService {
      * 修改字典信息
      * @param sysDictUpdateDTO  修改信息
      * @return boolean
-     * @throws CommonBizException
+     * @throws CommonBizException 通用业务异常
      */
     boolean update(SysDictUpdateDTO sysDictUpdateDTO) throws CommonBizException;
 

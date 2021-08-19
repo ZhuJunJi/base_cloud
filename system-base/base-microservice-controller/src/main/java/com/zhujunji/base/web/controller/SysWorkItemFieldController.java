@@ -6,10 +6,7 @@ import com.zhujunji.base.service.dto.SysWorkItemFieldUpdateDTO;
 import com.zhujunji.common.response.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -25,7 +22,7 @@ public class SysWorkItemFieldController {
         return Result.newSuccessResult();
     }
 
-    @PostMapping
+    @PutMapping
     public Result<?> update(@RequestBody SysWorkItemFieldUpdateDTO sysWorkItemFieldUpdateDTO){
         sysWorkItemFieldService.update(sysWorkItemFieldUpdateDTO);
         return Result.newSuccessResult();

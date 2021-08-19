@@ -13,7 +13,6 @@ public class BaseWorkItemDataController {
     @DubboReference(protocol = "dubbo", version = "1.0.0")
     private BaseWorkItemDataService baseWorkItemDataService;
 
-
     @PostMapping
     public Result<Boolean> create(@PathVariable(name = "workItemId") Long workItemId,
                                   @RequestBody BaseJSONObjectCreateRequest jsonObjectCreateRequest){

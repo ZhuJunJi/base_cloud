@@ -1,31 +1,22 @@
 package com.zhujunji.common.request;
 
 import com.zhujunji.common.enums.LanguageEnum;
-import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
-public class BaseRequest implements Serializable {
+public interface BaseRequest extends Serializable {
+
 
     /**
-     * 请求 ID
+     * 改方法提供统一初始换请求通用参数的处理能力，清参考 system-base 模块 controller 的
+     *
+     * BaseRequestParameterHandler#doBefore(JoinPoint)
+     * @param requestId
+     * @param requester
+     * @param language
+     * @param requestTime
+     * @see BaseRequestParameterHandler#doBefore(JoinPoint)
      */
-    private String requestId;
-    /**
-     * 请求时间
-     */
-    private Date requestTime;
-
-    /**
-     * 请求者
-     */
-    private Long requester;
-
-    private LanguageEnum language;
-
-    public BaseRequest(){
-        this.requestTime = new Date();
-    }
+    void init(String requestId, Long requester, LanguageEnum language, Date requestTime);
 }

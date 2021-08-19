@@ -9,7 +9,7 @@ import java.util.Date;
  * BaseEntity
  */
 @Data
-public class BaseObject implements Serializable {
+public class BaseObject implements Serializable{
     /**
      * 主键 ID
      */
