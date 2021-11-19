@@ -7,6 +7,7 @@ import com.zhujunji.user.dto.SysRoleDTO;
 import com.zhujunji.user.dto.SysUserDTO;
 import com.zhujunji.user.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +27,8 @@ import java.util.stream.Collectors;
 @Service
 public class SSOUserDetailService implements UserDetailsService {
 
-      SysUserService userService;
+    @DubboReference(version = "1.0.0")
+    private SysUserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

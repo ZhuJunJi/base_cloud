@@ -17,4 +17,9 @@ public class GlobalConstants {
      * 默认通用字段处理器
      */
     public static final String DEFAULT_FIELD_HANDLER = "DefaultFieldHandler";
+
+    /**
+     * 版本
+     */
+    public static final String VERSION = "version";
 }

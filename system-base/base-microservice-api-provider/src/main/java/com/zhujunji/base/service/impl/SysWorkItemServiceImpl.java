@@ -96,6 +96,7 @@ public class SysWorkItemServiceImpl implements SysWorkItemService {
         }
         SysWorkItemDO sysWorkItemDO = new SysWorkItemDO();
         BeanUtils.copyProperties(sysWorkItemCreateDTO, sysWorkItemDO);
+        sysWorkItemDO.setUpdateBy(sysWorkItemCreateDTO.getCreateBy());
         return sysWorkItemDO;
     }
 

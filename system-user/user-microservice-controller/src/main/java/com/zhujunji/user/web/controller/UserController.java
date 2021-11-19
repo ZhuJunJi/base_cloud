@@ -7,12 +7,14 @@ import com.zhujunji.user.service.SysUserService;
 import com.zhujunji.user.vo.SysUserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.core.env.Environment;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -29,9 +31,13 @@ public class UserController {
     @DubboReference(version = "1.0.0",timeout = 10000)
     private SysUserService userService;
 
+    @Resource
+    private Environment environment;
+
     @GetMapping("/hello")
     public Result<String> hello(){
-        return Result.newSuccessResult("hello");
+        String port = environment.getProperty("server.port",String.class);
+        return Result.newSuccessResult("127.0.0.1:" + port + "提供服务");
     }
 
     @PostMapping("/save")
@@ -59,6 +65,7 @@ public class UserController {
 
     @GetMapping("/token")
     public Object get(Authentication authentication){
+
         Object p = authentication.getPrincipal();
         Object object = authentication.getCredentials();
         OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails)authentication.getDetails();

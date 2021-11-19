@@ -32,9 +32,9 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 100ms
-dubbo:w
+dubbo:
   cloud:
-    subscribed-services: "base-microservice-provider"
+    subscribed-services: "base-microservice-provider,user-microservice-provider"
   protocol:
     name: dubbo
     port: -1
