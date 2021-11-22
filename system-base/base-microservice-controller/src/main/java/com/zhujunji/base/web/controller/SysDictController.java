@@ -18,7 +18,7 @@ import static com.zhujunji.common.constant.GlobalConstants.ACCEPT_LANGUAGE;
 @RequestMapping("/dict")
 public class SysDictController {
 
-    @DubboReference(protocol = "dubbo", version = "1.0.0")
+    @DubboReference(protocol = "dubbo", version = "1.0.0", check = false)
     private SysDictService sysDictService;
 
     @GetMapping("/{dictId}")

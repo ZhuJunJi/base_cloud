@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/field")
 public class SysFieldController {
 
-    @DubboReference(protocol = "dubbo", version = "1.0.0")
+    @DubboReference(protocol = "dubbo", version = "1.0.0", check = false)
     private SysFiledService sysFiledService;
 
     @GetMapping("/{fieldId}")

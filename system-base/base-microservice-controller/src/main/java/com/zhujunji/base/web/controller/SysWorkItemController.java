@@ -18,10 +18,10 @@ import static com.zhujunji.common.constant.GlobalConstants.ACCEPT_LANGUAGE;
 public class SysWorkItemController {
 
 
-    @DubboReference(protocol = "dubbo", version = "1.0.0")
+    @DubboReference(protocol = "dubbo", version = "1.0.0", check = false)
     private SysWorkItemService sysWorkItemService;
 
-    @DubboReference(protocol = "dubbo", version = "1.0.0")
+    @DubboReference(protocol = "dubbo", version = "1.0.0", check = false)
     private SysWorkItemFieldService sysWorkItemFieldService;
 
     @PostMapping

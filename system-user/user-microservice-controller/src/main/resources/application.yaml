@@ -7,8 +7,8 @@ spring:
         server-addr: 127.0.0.1:8848
         namespace: dev
         group: DEFAULT_GROUP
-        metadata:
-          version: 1.0.0
+#        metadata:
+#          version: 1.0.0
   redis:
     database: 2
     host: 127.0.0.1

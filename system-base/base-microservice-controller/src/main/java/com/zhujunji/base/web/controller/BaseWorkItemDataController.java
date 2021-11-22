@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/workitem/{workItemId}")
 public class BaseWorkItemDataController {
 
-    @DubboReference(protocol = "dubbo", version = "1.0.0")
+    @DubboReference(protocol = "dubbo", version = "1.0.0", check = false)
     private BaseWorkItemDataService baseWorkItemDataService;
 
     @PostMapping
