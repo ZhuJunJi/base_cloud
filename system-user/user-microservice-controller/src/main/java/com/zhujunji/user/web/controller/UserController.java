@@ -28,7 +28,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @DubboReference(version = "1.0.0",timeout = 10000)
+    @DubboReference(version = "1.0.0",timeout = 10000, check = false)
     private SysUserService userService;
 
     @Resource

@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Service
 public class SSOUserDetailService implements UserDetailsService {
 
-    @DubboReference(version = "1.0.0")
+    @DubboReference(version = "1.0.0", check = false)
     private SysUserService userService;
 
     @Override

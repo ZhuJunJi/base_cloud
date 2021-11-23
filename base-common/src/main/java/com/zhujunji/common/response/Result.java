@@ -131,6 +131,19 @@ public class Result<T> implements Serializable {
     /**
      * 返回失败的结果
      *
+     * @param message   提示信息
+     * @param errorCode 错误码
+     * @return <T> Result<T>
+     */
+    public static <T> Result<T> newFailureResult(String message, String errorCode) {
+        Result<T> result = Result.newFailureResult(message);
+        result.errorCode = errorCode;
+        return result;
+    }
+
+    /**
+     * 返回失败的结果
+     *
      * @param commonBizException 异常
      * @return <T> Result<T>
      */

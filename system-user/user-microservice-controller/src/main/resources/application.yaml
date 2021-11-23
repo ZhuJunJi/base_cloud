@@ -5,7 +5,7 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace: dev
+        namespace: a6f54f4a-1768-4847-bfcd-8cb00367c586
         group: DEFAULT_GROUP
 #        metadata:
 #          version: 1.0.0
@@ -33,7 +33,7 @@ dubbo:
 security:
   oauth2:
     client:
-      client-id: user-microservice-web
+      client-id: ${spring.application.name}
       client-secret: 123456
       user-authorization-uri: http://127.0.0.1:9098/oauth/authorize
       access-token-uri: http://127.0.0.1:9098/oauth/token

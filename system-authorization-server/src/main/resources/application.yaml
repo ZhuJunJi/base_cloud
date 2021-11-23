@@ -19,7 +19,7 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace: dev
+        namespace: a6f54f4a-1768-4847-bfcd-8cb00367c586
         group: DEFAULT_GROUP
   redis:
     database: 2
@@ -34,7 +34,7 @@ spring:
     timeout: 100ms
 dubbo:
   cloud:
-    subscribed-services: "base-microservice-provider,user-microservice-provider"
+    subscribed-services: "user-microservice-provider"
   protocol:
     name: dubbo
     port: -1

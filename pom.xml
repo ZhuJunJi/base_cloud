@@ -22,6 +22,7 @@
         <spring-cloud.version>2020.0.0</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud-starter-oauth2.verion>2.2.5.RELEASE</spring-cloud-starter-oauth2.verion>
+        <sentinel.version>1.8.0</sentinel.version>
 
         <mybatis-spring-boot-starter.version>2.1.4</mybatis-spring-boot-starter.version>
         <slf4j-nop.version>2.0.0-alpha1</slf4j-nop.version>
@@ -60,6 +61,12 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>
+                <version>${sentinel.version}</version>
             </dependency>
 
             <!-- MyBatis -->

@@ -15,8 +15,11 @@ management:
       show-details: always
 ---
 spring:
+  application:
+    name: gateway
   cloud:
     gateway:
+      enabled: true
       discovery:
         locator:
           lower-case-service-id: true
@@ -24,14 +27,64 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace: dev
+        namespace: a6f54f4a-1768-4847-bfcd-8cb00367c586
         group: DEFAULT_GROUP
+      config:
+        enabled: true
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        namespace: a6f54f4a-1768-4847-bfcd-8cb00367c586
+        group: ${spring.application.name}
+        prefix: ${spring.application.name}
+        file-extension: yaml
+        refresh-enabled: true
+        extension-configs[0]:
+          data-id: ${spring.application.name}-sentinel.json
+          group: ${spring.application.name}
+    sentinel:
+      enabled: true
+      # 是否提前触发 Sentinel 初始化
+      eager: true
+      filter:
+        enabled: false
+      transport:
+        dashboard: 127.0.0.1:7200
+        client-ip: 127.0.0.1
+      datasource:
+        ds:
+          nacos:
+            username: nacos
+            password: nacos
+            file-extension: json
+            namespace: a6f54f4a-1768-4847-bfcd-8cb00367c586
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            data-id: ${spring.application.name}-sentinel.json
+            group-id: ${spring.application.name}
+            rule-type: gw-flow
+  #      datasource:
+  #        # 网关限流规则， gw-flow 为key
+  #        gw-flow:
+  #          nacos:
+  #            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+  #            dataId: ${spring.application.name}-gw-flow-rules
+  #            groupId: SENTINEL_GROUP
+  #            data-type: json
+  #            rule-type: GW_FLOW
+  #        # 自定义 API 分组
+  #        gw-api-flow:
+  #          nacos:
+  #            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+  #            dataId: ${spring.application.name}-gw-api-flow-rules
+  #            groupId: SENTINEL_GROUP
+  #            data-type: json
+  #            rule-type: GW_API_GROUP
   config:
     activate:
       on-profile: dev
 dubbo:
   cloud:
-    subscribed-services: "*"
+    subscribed-services: "user-microservice-web"
   registry:
     address: nacos://127.0.0.1:8848
   protocol:
