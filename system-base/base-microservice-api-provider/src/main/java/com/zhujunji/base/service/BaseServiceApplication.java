@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.zhujunji.base.service","com.zhujunji.common.utils"})
+@SpringBootApplication
 @MapperScan(basePackages = "com.zhujunji.base.mapper")
 public class BaseServiceApplication {
 

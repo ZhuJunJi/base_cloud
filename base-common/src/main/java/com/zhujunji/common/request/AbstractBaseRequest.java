@@ -4,7 +4,7 @@ import com.zhujunji.common.enums.LanguageEnum;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public abstract class AbstractBaseRequest implements BaseRequest {
@@ -16,8 +16,7 @@ public abstract class AbstractBaseRequest implements BaseRequest {
     /**
      * 请求时间
      */
-    private Date requestTime;
-
+    private LocalDateTime requestTime;
     /**
      * 请求者
      */
@@ -26,7 +25,14 @@ public abstract class AbstractBaseRequest implements BaseRequest {
     private LanguageEnum language;
 
     @Override
-    public void init(String requestId, Long requester, LanguageEnum language, Date requestTime) {
+    public void initBefore() {
+        // default do noting support child override
+    }
+
+    @Override
+    public void init(String requestId, Long requester, LanguageEnum language, LocalDateTime requestTime) {
+        // 提供子类扩展初始化前处理逻辑方法
+        initBefore();
         if (StringUtils.isBlank(this.requestId)) {
             this.requestId = requestId;
         }
@@ -36,8 +42,13 @@ public abstract class AbstractBaseRequest implements BaseRequest {
         if (null == this.language) {
             this.language = language;
         }
-        if (null == this.requestTime) {
-            this.requestTime = requestTime;
-        }
+        this.requestTime = requestTime;
+        // 提供子类扩展初始化后处理逻辑方法
+        initAfter();
+    }
+
+    @Override
+    public void initAfter() {
+        // default do noting support child override
     }
 }

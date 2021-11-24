@@ -1,11 +1,7 @@
 package com.zhujunji.common.utils;
 
-import io.micrometer.core.lang.NonNull;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 
 /**
  * Bean工具类<br>
@@ -13,24 +9,14 @@ import org.springframework.stereotype.Component;
  *
  * @Author cipher
  */
-@Component
-public class SpringBeanUtil implements ApplicationContextAware {
-
-    private static ApplicationContext applicationContext;
-
-    @Override
-    public void setApplicationContext(@NonNull ApplicationContext context) throws BeansException {
-        if (applicationContext == null) {
-            applicationContext = context;
-        }
-    }
+public class SpringBeanUtil {
 
     /**
      * 安全的获取 Bean
      * @param name  Bean Name
      * @return Object
      */
-    public static Object getBeanIfAvailable(String name) {
+    public static Object getBeanIfAvailable(ApplicationContext applicationContext, String name) {
         if(applicationContext.containsBeanDefinition(name)){
             return applicationContext.getBean(name);
         }
@@ -44,7 +30,7 @@ public class SpringBeanUtil implements ApplicationContextAware {
      * @param <T>   T
      * @return T
      */
-    public static <T> T getBeanIfAvailable(String name, Class<T> clazz) {
+    public static <T> T getBeanIfAvailable(ApplicationContext applicationContext, String name, Class<T> clazz) {
         if(applicationContext.containsBeanDefinition(name)){
             return applicationContext.getBean(name,clazz);
         }
@@ -57,7 +43,7 @@ public class SpringBeanUtil implements ApplicationContextAware {
      * @param <T>   T
      * @return T
      */
-    public static <T> T getBeanIfAvailable(Class<T> clazz) {
+    public static <T> T getBeanIfAvailable(ApplicationContext applicationContext, Class<T> clazz) {
         ObjectProvider<T> beanProvider = applicationContext.getBeanProvider(clazz);
         return beanProvider.getIfAvailable();
     }

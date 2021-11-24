@@ -37,6 +37,10 @@ public enum ExpCodeEnum implements Serializable {
     DEFAULT_FIELD_HANDLER_NOT_EXSIT_EXCEPTION(COM_EXP_PREFIX + "018", "默认的通用字段处理器不存在请检查 Bean:DefaultFieldHandler 是否存在！"),
     PICKLIST_FIELD_OPTION_NOT_EXSIT_EXCEPTION(COM_EXP_PREFIX + "019", "枚举类型字段的选项值不存在！"),
     STRING_TO_OBJECT_ID_EXCEPTION(COM_EXP_PREFIX + "020",""),
+    TIME_STAMP_PARSE_EXCEPTION(COM_EXP_PREFIX + "021","请求时间戳格式错误！"),
+    REQUEST_TOO_FREQUENTLY(COM_EXP_PREFIX + "022","请求接口过于频繁！"),
+    REPEAT_REQUEST(COM_EXP_PREFIX + "023","请勿重复请求！"),
+    TIME_STAMP_INVALID(COM_EXP_PREFIX + "024","请求时间戳间隔超过了 3 秒已经失效！"),
 
     /**
      * User模块异常

@@ -16,8 +16,8 @@ public class BaseJSONObjectCreateRequest extends BaseCreateRequest{
     }
 
     @Override
-    public void init(String requestId, Long requester, LanguageEnum language, Date requestTime) {
-        super.init(requestId, requester, language, requestTime);
+    public void initAfter() {
+        super.initAfter();
         // 创建人
         data.put("create_by", this.getRequester());
         // 创建时间

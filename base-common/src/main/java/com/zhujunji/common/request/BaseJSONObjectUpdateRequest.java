@@ -10,15 +10,15 @@ import java.util.Date;
 @Data
 public class BaseJSONObjectUpdateRequest extends BaseUpdateRequest{
 
-    private JSONObject data;
+    private JSONObject data = new JSONObject();
 
     public BaseJSONObjectUpdateRequest(){
-        this.data = new JSONObject();
+
     }
 
     @Override
-    public void init(String requestId, Long requester, LanguageEnum language, Date requestTime) {
-        super.init(requestId, requester, language, requestTime);
+    public void initAfter() {
+        super.initAfter();
         // 更新人
         data.put("update_by", this.getUpdateBy());
         // 更新时间
