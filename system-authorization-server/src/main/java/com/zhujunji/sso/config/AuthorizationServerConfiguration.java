@@ -61,6 +61,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
         // 一天有效期
         tokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(1));
+        // 刷新 TOKEN 有效期
+        tokenServices.setRefreshTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(2));
         // Spring security5中新增加了加密方式，并把原有的spring security的密码存储格式改了
         endpoints.authenticationManager(authenticationManager);
         endpoints.tokenServices(tokenServices);
