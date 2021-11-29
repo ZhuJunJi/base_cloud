@@ -39,5 +39,11 @@ public class ExpPrefix {
     /** SecKill 模块异常码前缀 */
     public static final String SEC_KILL_EXP_PREFIX = "110";
 
+    /** RPC 异常前缀 */
+    public static final String RPC_EXP_PREFIX = "200";
+
+    /** Sentinel 异常，限流异常*/
+    public static final String SENTINEL_EXP_PREFIX = "210";
+
 
 }

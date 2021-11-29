@@ -1,4 +1,15 @@
+# 开启 shutdown endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'shutdown,health'
+  endpoint:
+    shutdown:
+      enabled: true
 spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
   application:
     name: user-microservice-web
   cloud:
@@ -22,6 +33,7 @@ spring:
     timeout: 100ms
 server:
   port: 10000
+  shutdown: graceful
 dubbo:
   cloud:
     subscribed-services: "user-microservice-provider"

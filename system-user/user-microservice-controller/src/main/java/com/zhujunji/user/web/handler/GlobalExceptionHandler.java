@@ -3,7 +3,9 @@ package com.zhujunji.user.web.handler;
 import com.zhujunji.common.exception.CommonBizException;
 import com.zhujunji.common.exception.CommonSysException;
 import com.zhujunji.common.exception.ExpCodeEnum;
+import com.zhujunji.common.exception.ExpPrefix;
 import com.zhujunji.common.response.Result;
+import org.apache.dubbo.rpc.RpcException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,7 +23,7 @@ public class GlobalExceptionHandler<T> {
 
     /**
      * 请求方法不正确
-     * @param exception     HttpRequestMethodNotSupportedException
+     * @param exception 异常
      * @return Result<T>
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -37,6 +39,11 @@ public class GlobalExceptionHandler<T> {
     @ExceptionHandler(value= CommonSysException.class)
     public Result<T> commonSysException(HttpServletRequest request, CommonSysException e){
         return Result.newFailureResult(e);
+    }
+
+    @ExceptionHandler(value= RpcException.class)
+    public Result<T> commonSysException(HttpServletRequest request, RpcException e){
+        return Result.newFailureResult(e.getMessage(),ExpPrefix.RPC_EXP_PREFIX + e.getCode());
     }
 
     @ExceptionHandler(value=Exception.class)

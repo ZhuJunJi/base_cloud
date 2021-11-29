@@ -3,6 +3,7 @@ package com.zhujunji.gateway.config;
 import com.alibaba.cloud.sentinel.custom.SentinelDataSourceHandler;
 import com.alibaba.cloud.sentinel.datasource.config.AbstractDataSourceProperties;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
+import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -37,6 +38,7 @@ public class GatewayConfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
         // Register the block exception handler for Spring Cloud Gateway.
+        GatewayCallbackManager.setBlockHandler(new GatewayBlockRequestHandler());
         return new SentinelGatewayBlockExceptionHandler(viewResolvers, serverCodecConfigurer);
     }
 

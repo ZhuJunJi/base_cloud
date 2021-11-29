@@ -1,7 +1,5 @@
 package com.zhujunji.gateway;
 
-import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
-import com.zhujunji.gateway.config.GatewayBlockRequestHandler;
 import com.zhujunji.gateway.config.GrayRoundLoadbalancerConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,7 +16,6 @@ import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 public class GatewayApplication {
 
     public static void main(String[] args) {
-        GatewayCallbackManager.setBlockHandler(new GatewayBlockRequestHandler());
         SpringApplication.run(GatewayApplication.class);
     }
 

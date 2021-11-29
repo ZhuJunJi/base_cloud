@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
-import org.springframework.security.web.access.expression.WebSecurityExpressionRoot;
 
 @EnableDiscoveryClient
 @SpringBootApplication

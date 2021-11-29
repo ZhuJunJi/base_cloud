@@ -2,6 +2,7 @@ package com.zhujunji.gateway.config;
 
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.BlockRequestHandler;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.DefaultBlockRequestHandler;
+import com.zhujunji.common.exception.ExpPrefix;
 import com.zhujunji.common.response.Result;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.InvalidMediaTypeException;
@@ -41,8 +42,9 @@ public class GatewayBlockRequestHandler implements BlockRequestHandler {
     }
 
     private Result<Void> buildErrorResult(Throwable ex) {
+
         return Result.newFailureResult(DEFAULT_BLOCK_MSG_PREFIX + ex.getClass().getSimpleName(),
-                String.valueOf(HttpStatus.TOO_MANY_REQUESTS.value()));
+                ExpPrefix.SENTINEL_EXP_PREFIX + HttpStatus.TOO_MANY_REQUESTS.value());
     }
 
     /**
